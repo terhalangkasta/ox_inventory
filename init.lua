@@ -14,7 +14,7 @@ end
 
 shared = {
     resource = GetCurrentResourceName(),
-    framework = GetConvar('inventory:framework', 'esx'),
+    framework = GetConvar('inventory:framework', 'rsg'),
     playerslots = GetConvarInt('inventory:slots', 50),
     playerweight = GetConvarInt('inventory:weight', 30000),
     target = GetConvarInt('inventory:target', 0) == 1,
@@ -78,8 +78,10 @@ else
     client = {
         autoreload = GetConvarInt('inventory:autoreload', 0) == 1,
         screenblur = GetConvarInt('inventory:screenblur', 1) == 1,
-        keys = json.decode(GetConvar('inventory:keys', '')) or { 'F2', 'K', 'TAB' },
-        enablekeys = json.decode(GetConvar('inventory:enablekeys', '[249]')),
+        keys = json.decode(GetConvar('inventory:keys', '')) or { 0xE6360A8E --[[ TAB ]], 0xF3830D8E --[[ J ]], 0x26E9DC00 --[[ Z ]] },
+		enablekeys = json.decode(GetConvar('inventory:enablekeys', '[249]')),
+		enablekeystable = false,
+		enabledkey = 0xE6360A8E, -- [[ TAB ]]
         aimedfiring = GetConvarInt('inventory:aimedfiring', 0) == 1,
         giveplayerlist = GetConvarInt('inventory:giveplayerlist', 0) == 1,
         weaponanims = GetConvarInt('inventory:weaponanims', 1) == 1,
@@ -112,7 +114,7 @@ end
 
 function shared.print(...) print(string.strjoin(' ', ...)) end
 
-function shared.info(...) lib.print.info(string.strjoin(' ', ...)) end
+function shared.info(...) shared.print('^2[info]^7', ...) end
 
 ---Throws a formatted type error.
 ---```lua

@@ -280,16 +280,6 @@ local function openEvidence()
 end
 
 local markerColour = { 30, 30, 150 }
-local textPrompts = {
-    evidence = {
-        options = { icon = 'fa-box-archive' },
-        message = ('**%s**  \n%s'):format(locale('open_police_evidence'), locale('interact_prompt', GetControlInstructionalButton(0, 38, true):sub(3)))
-    },
-    stash = {
-        options = { icon = 'fa-warehouse' },
-        message = ('**%s**  \n%s'):format(locale('open_stash'), locale('interact_prompt', GetControlInstructionalButton(0, 38, true):sub(3)))
-    }
-}
 
 Inventory.Evidence = setmetatable(lib.load('data.evidence'), {
 	__call = function(self)

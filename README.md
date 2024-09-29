@@ -1,3 +1,5 @@
+BASIC CONVERT TO REDM RSG FRAMEWORK
+
 # ox_inventory
 
 A complete inventory system for FiveM, implementing items, weapons, shops, and more without any strict framework dependency.
@@ -23,6 +25,7 @@ We do not guarantee compatibility or support for third-party resources.
 - [esx](https://github.com/esx-framework/esx_core)
 - [qbox](https://github.com/Qbox-project/qbx_core)
 - [nd_core](https://github.com/ND-Framework/ND_Core)
+- [rsg-core](https://github.com/qbcore-framework/rsg-core) (LIMITED SUPPORT! Use qbox instead)
 
 ## ✨ Features
 

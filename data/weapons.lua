@@ -1,10 +1,10 @@
 return {
 	Weapons = {
-		['WEAPON_BATTLERIFLE'] = {
+		['WEAPON_BOW_IMPROVED'] = {
 			label = 'Battle Rifle',
 			weight = 3300,
 			durability = 0.03,
-			ammoname = 'ammo-rifle2',
+			ammoname = 'ammo-arrow',
 		},
 
 		['WEAPON_SNOWLAUNCHER'] = {

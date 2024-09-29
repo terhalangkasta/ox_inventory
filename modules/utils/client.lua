@@ -111,8 +111,8 @@ function Utils.WeaponWheel(state)
     if state == nil then state = EnableWeaponWheel end
 
     EnableWeaponWheel = state
-    SetWeaponsNoAutoswap(not state)
-    SetWeaponsNoAutoreload(not state)
+    --SetWeaponsNoAutoswap(not state)
+    --SetWeaponsNoAutoreload(not state)
 
     if client.suppresspickups then
         -- CLEAR_PICKUP_REWARD_TYPE_SUPPRESSION | SUPPRESS_PICKUP_REWARD_TYPE
@@ -123,16 +123,12 @@ end
 exports('weaponWheel', Utils.WeaponWheel)
 
 function Utils.CreateBlip(settings, coords)
-    local blip = AddBlipForCoord(coords.x, coords.y, coords.z)
-    SetBlipSprite(blip, settings.id)
-    SetBlipDisplay(blip, 4)
-    SetBlipScale(blip, settings.scale)
-    SetBlipColour(blip, settings.colour)
-    SetBlipAsShortRange(blip, true)
-    BeginTextCommandSetBlipName(settings.name)
-    EndTextCommandSetBlipName(blip)
+	local blip = Citizen.InvokeNative(0x554D9D53F696D002, 1664425300, coords)
+	SetBlipSprite(blip, settings.id, 52)
+	SetBlipScale(blip, settings.scale)
+	Citizen.InvokeNative(0x9CB1A1623062F402, blip, settings.name) -- SetBlipNameFromPlayerString
 
-    return blip
+	return blip
 end
 
 ---Takes OxTargetBoxZone or legacy zone data (PolyZone) and creates a zone.

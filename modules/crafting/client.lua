@@ -7,7 +7,7 @@ local Utils = require 'modules.utils.client'
 local markerColour = { 150, 150, 30 }
 local prompt = {
     options = { icon = 'fa-wrench' },
-    message = ('**%s**  \n%s'):format(locale('open_crafting_bench'), locale('interact_prompt', GetControlInstructionalButton(0, 38, true):sub(3)))
+    --message = ('**%s**  \n%s'):format(locale('open_crafting_bench'), locale('interact_prompt', GetControlInstructionalButton(0, 38, true):sub(3)))
 }
 
 ---@param id number

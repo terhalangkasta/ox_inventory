@@ -15,35 +15,13 @@ local Query = {
 }
 
 Citizen.CreateThreadNow(function()
-    local playerTable, playerColumn, vehicleTable, vehicleColumn
+    local playerTable, playerColumn
 
-    if shared.framework == 'ox' then
-        playerTable = 'character_inventory'
-        playerColumn = 'charid'
-        vehicleTable = 'vehicles'
-        vehicleColumn = 'id'
-    elseif shared.framework == 'esx' then
-        playerTable = 'users'
-        playerColumn = 'identifier'
-        vehicleTable = 'owned_vehicles'
-        vehicleColumn = 'plate'
-    elseif shared.framework == 'nd' then
-        playerTable = 'nd_characters'
-        playerColumn = 'charid'
-        vehicleTable = 'nd_vehicles'
-        vehicleColumn = 'id'
-    elseif shared.framework == 'qbx' then
-        playerTable = 'players'
-        playerColumn = 'citizenid'
-        vehicleTable = 'player_vehicles'
-        vehicleColumn = 'id'
-    else
-        return
-    end
+    playerTable = 'players'
+    playerColumn = 'citizenid'
 
     for k, v in pairs(Query) do
-        Query[k] = v:gsub('{user_table}', playerTable):gsub('{user_column}', playerColumn):gsub('{vehicle_table}',
-            vehicleTable):gsub('{vehicle_column}', vehicleColumn)
+        Query[k] = v:gsub('{user_table}', playerTable):gsub('{user_column}', playerColumn)
     end
 
     Wait(0)
@@ -84,28 +62,6 @@ Citizen.CreateThreadNow(function()
         -- end
     end
 
-    result = MySQL.query.await(('SHOW COLUMNS FROM `%s`'):format(vehicleTable))
-
-    if result then
-        local glovebox, trunk
-
-        for i = 1, #result do
-            local column = result[i]
-            if column.Field == 'glovebox' then
-                glovebox = true
-            elseif column.Field == 'trunk' then
-                trunk = true
-            end
-        end
-
-        if not glovebox then
-            MySQL.query(('ALTER TABLE `%s` ADD COLUMN `glovebox` LONGTEXT NULL'):format(vehicleTable))
-        end
-
-        if not trunk then
-            MySQL.query(('ALTER TABLE `%s` ADD COLUMN `trunk` LONGTEXT NULL'):format(vehicleTable))
-        end
-    end
 
     success, result = pcall(MySQL.scalar.await, ('SELECT inventory FROM `%s`'):format(playerTable))
 
